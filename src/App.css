@@ -5,7 +5,15 @@
 
 }
 .App{
+  background-color: #eff2f5;
+  font-family: 'Noto Serif', serif;
+}
+.container{
   display: flex;
-flex-wrap: wrap;
-background: lightgray;
+  flex-direction: column;
+
+}
+.card{
+  display: flex;
+  flex-wrap: wrap;
 }

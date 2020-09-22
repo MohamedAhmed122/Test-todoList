@@ -5,7 +5,7 @@ import './ResultsStyle.css'
 import user from '../../assets/user.png'
 
 const Result =({item, handleDelete, handleSelected})=>{
-    const {des,image,date,name} =item;
+   
     return(
         <div className='result'>
             <div>
@@ -16,6 +16,7 @@ const Result =({item, handleDelete, handleSelected})=>{
                 <div className='item'>
                     <p className='description'>{item.des}</p>
                     <p className='date'>{item.date}</p>
+                    <p className='date'>{item.email}</p>
                     <div>
                         <button
                          className='delete-btn button' onClick={()=>handleDelete(item.id)}>Delete</button>

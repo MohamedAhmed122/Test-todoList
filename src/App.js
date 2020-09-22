@@ -4,19 +4,17 @@ import './App.css';
 import TodoInputs from './components/TodoInput/TodoInputs';
 import Result from './components/Results/Results';
 import TodoListData from './components/API/API'
+import Navbar from './components//Navbar/Navbar'
 function App() {
 
   const [todoItems, setTodoItems] = useState(TodoListData)
   const [selectedTodo, setSelectedTodo] = useState(null);
 
-  const handleCreateTodo =(todo)=>{
-    setTodoItems([...todoItems, todo])
-  }
+  const handleCreateTodo =(todo)=> setTodoItems([...todoItems, todo])
+  
 
-  const handleSelected = (todo) => {
-    setSelectedTodo(todo);
-    
-  };
+  const handleSelected = (todo) =>  setSelectedTodo(todo);
+  
   const handleUpdate =(newTodo)=>{
     setTodoItems(
           todoItems.map(todo => todo.id === newTodo.id ? newTodo :todo)
@@ -30,23 +28,26 @@ function App() {
 
   return (
     <div className="App">
-      <TodoInputs 
-      handleCreateTodo={handleCreateTodo}
-      handleUpdate={handleUpdate}
-      selectedTodo={selectedTodo}
-      key={selectedTodo ? selectedTodo.id : null}
-      />
-      <div>
-        {
-          todoItems.map(item =>(
-            <Result
-            key={item.id} 
-            item={item}
-            handleDelete={handleDelete}  
-            handleSelected={handleSelected}
-            />
-          ))
-        }
+      <Navbar />
+      <div className='container'>
+        <TodoInputs 
+        handleCreateTodo={handleCreateTodo}
+        handleUpdate={handleUpdate}
+        selectedTodo={selectedTodo}
+        key={selectedTodo ? selectedTodo.id : null}
+        />
+        <div className='card'>
+          {
+            todoItems.map(item =>(
+              <Result
+              key={item.id} 
+              item={item}
+              handleDelete={handleDelete}  
+              handleSelected={handleSelected}
+              />
+            ))
+          }
+        </div>
       </div>
     </div>
   );

@@ -26,9 +26,7 @@ const TodoInputs =({handleCreateTodo ,selectedTodo ,handleUpdate})=>{
             ...values,
             id: cuid()
         })
-        
-       
-       
+        // setValues(initialValues)
     }
 
     return(
