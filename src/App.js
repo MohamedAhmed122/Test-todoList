@@ -7,17 +7,44 @@ import TodoListData from './components/API/API'
 function App() {
 
   const [todoItems, setTodoItems] = useState(TodoListData)
+  const [selectedTodo, setSelectedTodo] = useState(null);
 
   const handleCreateTodo =(todo)=>{
     setTodoItems([...todoItems, todo])
   }
+
+  const handleSelected = (todo) => {
+    setSelectedTodo(todo);
+    
+  };
+  const handleUpdate =(newTodo)=>{
+    setTodoItems(
+          todoItems.map(todo => todo.id === newTodo.id ? newTodo :todo)
+    )
+    setSelectedTodo(null)
+  } 
+
+  const handleDelete =(todoId)=>{
+    setTodoItems(todoItems.filter(item =>item.id !== todoId))
+  }
+
   return (
     <div className="App">
-      <TodoInputs handleCreateTodo={handleCreateTodo}/>
+      <TodoInputs 
+      handleCreateTodo={handleCreateTodo}
+      handleUpdate={handleUpdate}
+      selectedTodo={selectedTodo}
+      key={selectedTodo ? selectedTodo.id : null}
+      />
       <div>
         {
           todoItems.map(item =>(
-            <Result  key={item.id} item={item} />
+            <Result
+            key={item.id} 
+            item={item}
+            handleDelete={handleDelete}  
+            handleSelected={handleSelected}
+            />
           ))
         }
       </div>

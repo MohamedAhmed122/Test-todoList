@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import './TodoInputs.css'
 import cuid from "cuid";
-const TodoInputs =({handleCreateTodo})=>{
-    const initialValues={
+const TodoInputs =({handleCreateTodo ,selectedTodo ,handleUpdate})=>{
+    const initialValues= selectedTodo ??{
         name: '',
         email: '',
         des: '',
@@ -20,10 +20,14 @@ const TodoInputs =({handleCreateTodo})=>{
 
     const handleSubmit =(e) =>{
         e.preventDefault();
+         selectedTodo ?
+            handleUpdate({...selectedTodo,...values,}):
         handleCreateTodo({
             ...values,
             id: cuid()
         })
+        
+       
        
     }
 
