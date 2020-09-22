@@ -1,0 +1,52 @@
+.result{
+  height: 35vh;
+  width: 40vw;
+  background-color: white;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.result img{
+    height: 200px;
+    width: 200px;
+    margin: 5px 30px;
+    border-radius: 100px;
+}
+.result h4{
+    text-align: center;
+    color: #0097a7;
+    font-size: 20px;
+}
+.item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.description{
+margin: 20px 0px;
+}
+.date{
+    margin-bottom:10px ;
+    color: #0097a7;
+}
+.edit-btn{
+    background-color: #0097a7;
+}
+.delete-btn{
+    background-color: tomato;
+}
+.button{
+    width: 100px;
+    height: 30px;
+    color: white;
+    border: white;
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+    align-self: flex-end;
+}
