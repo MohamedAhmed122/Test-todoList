@@ -3,13 +3,17 @@ import React, { useState } from 'react';
 import './App.css';
 import TodoInputs from './components/TodoInput/TodoInputs';
 import Result from './components/Results/Results';
-import TodoListData from './components/API/API'
+import TodoListData from './API/API'
 import Navbar from './components//Navbar/Navbar'
+
+
+
 function App() {
 
   const [todoItems, setTodoItems] = useState(TodoListData)
   const [selectedTodo, setSelectedTodo] = useState(null);
 
+    
   const handleCreateTodo =(todo)=> setTodoItems([...todoItems, todo])
   
 

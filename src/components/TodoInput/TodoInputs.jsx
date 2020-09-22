@@ -2,7 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import './TodoInputs.css'
 import cuid from "cuid";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import FormInput from '../FormInput/FormInput';
+
+
 const TodoInputs =({handleCreateTodo ,selectedTodo ,handleUpdate})=>{
+
     const initialValues= selectedTodo ??{
         name: '',
         email: '',
@@ -10,43 +16,38 @@ const TodoInputs =({handleCreateTodo ,selectedTodo ,handleUpdate})=>{
         image: '',
         date: '',
     }
-    const [values, setValues] =useState(initialValues);
-
-
-    const handleInputChange=(e)=> {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
-    }
-
-    const handleSubmit =(e) =>{
-        e.preventDefault();
-         selectedTodo ?
-            handleUpdate({...selectedTodo,...values,}):
-        handleCreateTodo({
-            ...values,
-            id: cuid()
-        })
-        // setValues(initialValues)
-    }
+   
+    const validationSchema = Yup.object({
+        name: Yup.string().required("You must provide name"),
+        email: Yup.string().required("You must provide Email"),
+        des: Yup.string().required("You must provide Description "),
+        date: Yup.string().required("You must provide Date"),
+    })
 
     return(
         <div className='form-input'>
-            <form>
-                <label  >Name</label>
-                <input value={values.name}
-                 name='name' 
-                 onChange={(e)=>handleInputChange(e)} placeholder='Name' 
-                 />
-                <label  >Photo</label>
-                <input value={values.image} name='image' onChange={(e)=>handleInputChange(e)} placeholder='Please Add URL Image (optional)' />
-                <label >Email</label>
-                <input value={values.email} name='email' onChange={(e)=>handleInputChange(e)} placeholder='Email' />
-                <label >Descriptions</label>
-                <input value={values.des} name='des' onChange={(e)=>handleInputChange(e)} placeholder='Descriptions' />
-                <label >Date</label>
-                <input type='date' name='date' value={values.date} onChange={(e)=>handleInputChange(e)} placeholder='date' />
-                <button className='btn'  type='submit' onClick={(e)=>handleSubmit(e)}>Submit</button>
-            </form>
+            <Formik
+                onSubmit={(values ,{resetForm})=>{
+                    selectedTodo ?
+                    handleUpdate({...selectedTodo,...values}):
+                    handleCreateTodo({
+                        ...values,
+                        id: cuid()
+                    })
+                    resetForm()
+            }}
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+            >
+                <Form>
+                    <FormInput name='name' label='Name' placeholder='Name'/>
+                    <FormInput  name='image' label='Image'  placeholder='Please Add URL Image (optional)' />
+                    <FormInput  name='email' label='Email'  placeholder='Email' />
+                    <FormInput  name='des' label='Descriptions' placeholder='Descriptions' />
+                    <FormInput type='date' label='Date' name='date' placeholder='date' />
+                    <button className='btn'  type='submit'>Submit</button>
+                </Form>
+            </Formik>
         </div>
     )
 }
